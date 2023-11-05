@@ -1,12 +1,71 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ColorModeContext, useMode } from "./utils";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Dashboard, Topbar } from "./scenes";
+import {
+  Dashboard,
+  MainLayout,
+  Team,
+  Contacts,
+  Invoices,
+  Form,
+  Bar,
+  Pie,
+  Line,
+  FAQ,
+  Calendar,
+  Geography,
+} from "./scenes";
 
 const router = createBrowserRouter([
   {
-    path: "",
-    element: <Dashboard />,
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "/team",
+        element: <Team />,
+      },
+      {
+        path: "/contacts",
+        element: <Contacts />,
+      },
+      {
+        path: "/invoices",
+        element: <Invoices />,
+      },
+      {
+        path: "/form",
+        element: <Form />,
+      },
+      {
+        path: "/bar",
+        element: <Bar />,
+      },
+      {
+        path: "/pie",
+        element: <Pie />,
+      },
+      {
+        path: "/line",
+        element: <Line />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
+      },
+      {
+        path: "/calendar",
+        element: <Calendar />,
+      },
+      {
+        path: "/geography",
+        element: <Geography />,
+      },
+    ],
   },
 ]);
 
@@ -17,13 +76,7 @@ export const App = () => {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          {/* <RouterProvider router={router} /> */}
-          <main className="content">
-            <Topbar />
-            <RouterProvider router={router} />
-          </main>
-        </div>
+        <RouterProvider router={router} />
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
