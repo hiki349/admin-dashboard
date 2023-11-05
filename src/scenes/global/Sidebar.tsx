@@ -1,7 +1,7 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../utils";
 import {
   HomeOutlined,
@@ -23,7 +23,6 @@ interface SidebarItemProps {
   to: string;
   icon: ReactNode;
   selected: string;
-  setSelected: (title: string) => void;
 }
 
 export const SidebarItem: FC<SidebarItemProps> = ({
@@ -31,29 +30,27 @@ export const SidebarItem: FC<SidebarItemProps> = ({
   to,
   icon,
   selected,
-  setSelected,
 }) => {
   const navigate = useNavigate();
 
   return (
-    <MenuItem
-      active={selected === title}
-      onClick={() => {
-        setSelected(title);
-        navigate(to);
-      }}
-      icon={icon}
-    >
+    <MenuItem active={selected === to} onClick={() => navigate(to)} icon={icon}>
       <Typography>{title}</Typography>
     </MenuItem>
   );
 };
 
 export const Sidebar = () => {
+  const location = useLocation();
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [selected, setSelected] = useState(location.pathname);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+
+  useEffect(() => {
+    setSelected(location.pathname);
+  }, [location.pathname]);
 
   return (
     <ProSidebar collapsed={isCollapsed} backgroundColor={colors.primary["400"]}>
@@ -70,10 +67,12 @@ export const Sidebar = () => {
               sx={{ width: 75, height: 75 }}
               src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
             />
-            <Typography variant="h3" fontWeight="bold">
+            <Typography variant="h2" fontWeight="bold">
               Ed Roh
             </Typography>
-            <Typography>VP Fancy Admin</Typography>
+            <Typography color={colors.greenAccent[500]}>
+              VP Fancy Admin
+            </Typography>
           </Box>
         )}
 
@@ -82,14 +81,12 @@ export const Sidebar = () => {
           to="/"
           icon={<HomeOutlined />}
           selected={selected}
-          setSelected={setSelected}
         />
         <SidebarItem
           title="Manage Team"
           to="/team"
           icon={<PeopleOutline />}
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -97,7 +94,6 @@ export const Sidebar = () => {
           to="/contacts"
           icon={<ContactsOutlined />}
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -105,7 +101,6 @@ export const Sidebar = () => {
           to="/invoices"
           icon={<ReceiptOutlined />}
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -113,14 +108,12 @@ export const Sidebar = () => {
           to="/form"
           icon={<PersonOutline />}
           selected={selected}
-          setSelected={setSelected}
         />
         <SidebarItem
           title="Calendar"
           icon={<CalendarTodayOutlined />}
           to="/calendar"
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -128,7 +121,6 @@ export const Sidebar = () => {
           icon={<HelpOutline />}
           to="/faq"
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -136,7 +128,6 @@ export const Sidebar = () => {
           icon={<BarChartOutlined />}
           to="/bar"
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -144,7 +135,6 @@ export const Sidebar = () => {
           icon={<PieChartOutline />}
           to="/pie"
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -152,7 +142,6 @@ export const Sidebar = () => {
           icon={<TimelineOutlined />}
           to="/line"
           selected={selected}
-          setSelected={setSelected}
         />
 
         <SidebarItem
@@ -160,7 +149,6 @@ export const Sidebar = () => {
           icon={<MapOutlined />}
           to="/geography"
           selected={selected}
-          setSelected={setSelected}
         />
       </Menu>
     </ProSidebar>
