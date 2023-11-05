@@ -36,7 +36,7 @@ export const Contacts = () => {
   return (
     <Box m="20px">
       <Header
-        title="Contacts"
+        title="CONTACTS"
         subtitle="List of Contacts for Future Reference"
       />
       <Box
