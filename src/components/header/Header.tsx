@@ -21,7 +21,7 @@ export const Header: FC<HeaderProps> = ({ title, subtitle }) => {
       >
         {title}
       </Typography>
-      <Typography variant="h5" color={colors.greenAccent["400"]}>
+      <Typography variant="h5" color={colors.greenAccent["500"]}>
         {subtitle}
       </Typography>
     </Box>
