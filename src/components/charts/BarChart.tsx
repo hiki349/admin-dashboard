@@ -5,10 +5,10 @@ import { mockBarData as data } from "../../data/mockData";
 import { FC } from "react";
 
 interface BarChartProps {
-  isDachboard?: boolean;
+  isDashboard?: boolean;
 }
 
-export const BarChart: FC<BarChartProps> = ({ isDachboard = false }) => {
+export const BarChart: FC<BarChartProps> = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -94,7 +94,7 @@ export const BarChart: FC<BarChartProps> = ({ isDachboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDachboard ? undefined : "country",
+        legend: isDashboard ? undefined : "country",
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -102,7 +102,7 @@ export const BarChart: FC<BarChartProps> = ({ isDachboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDachboard ? undefined : "food",
+        legend: isDashboard ? undefined : "food",
         legendPosition: "middle",
         legendOffset: -40,
       }}
