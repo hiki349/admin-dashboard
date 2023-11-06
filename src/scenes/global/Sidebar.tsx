@@ -67,8 +67,8 @@ export const Sidebar = () => {
               sx={{ width: 75, height: 75 }}
               src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
             />
-            <Typography variant="h2" fontWeight="bold">
-              Ed Roh
+            <Typography variant="h2" fontWeight="bold" color={colors.grey['100']}>
+              Hiki♛
             </Typography>
             <Typography color={colors.greenAccent[500]}>
               VP Fancy Admin
